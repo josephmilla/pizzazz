@@ -19,7 +19,7 @@ var app = express();
 * @param
 * @return
 **/
-app.get('/api/test', function(req, res) {
+app.get('/api/test', function(req, res, next) {
     console.log('/api/test');
     next();
   }, function (req, res) {
@@ -34,7 +34,7 @@ app.get('/api/test', function(req, res) {
 * @param
 * @return
 **/
-app.get('/api/complementary', function(req, res) {
+app.get('/api/complementary', function(req, res, next) {
     console.log('/api/complementary');
     next();
   }, function (req, res) {
@@ -49,7 +49,7 @@ app.get('/api/complementary', function(req, res) {
 * @param
 * @return
 **/
-app.get('/api/analogous', function(req, res) {
+app.get('/api/analogous', function(req, res, next) {
     console.log('/api/analogous');
     next();
   }, function (req, res) {
@@ -64,7 +64,7 @@ app.get('/api/analogous', function(req, res) {
 * @param
 * @return
 **/
-app.get('/api/triad', function(req, res) {
+app.get('/api/triad', function(req, res, next) {
     console.log('/api/triad');
     next();
   }, function (req, res) {
@@ -79,7 +79,7 @@ app.get('/api/triad', function(req, res) {
 * @param
 * @return
 **/
-app.get('/api/split', function(req, res) {
+app.get('/api/split', function(req, res, next) {
     console.log('/api/split');
     next();
   }, function (req, res) {
@@ -94,7 +94,7 @@ app.get('/api/split', function(req, res) {
 * @param
 * @return
 **/
-app.get('/api/rectangle', function(req, res) {
+app.get('/api/rectangle', function(req, res, next) {
     console.log('/api/rectangle');
     next();
   }, function (req, res) {
@@ -109,7 +109,7 @@ app.get('/api/rectangle', function(req, res) {
 * @param
 * @return
 **/
-app.get('/api/square', function(req, res) {
+app.get('/api/square', function(req, res, next) {
     console.log('/api/square');
     next();
   }, function (req, res) {
