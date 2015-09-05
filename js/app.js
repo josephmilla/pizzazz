@@ -2,7 +2,7 @@ $(document).foundation();
 
 function getTriad(color) {
   $.ajax({
-    url: "index2.html",
+    url: "http://www.google.com",
     cache: false,
     success: function(html) {
       alert(html);
@@ -14,11 +14,14 @@ function getTriad(color) {
   });
 }
 
+//getTriad();
+
 function setColorIndex(stringHex, index) {
   $("#color-" + index + "-block").css('background-color', stringHex);
   $("#color-" + index + "-text").text(stringHex);
 };
 
+//helper functions to set the colors
 function setColorOne(stringHex) {
   setColorIndex(stringHex, "one")
 };
@@ -31,8 +34,6 @@ function setColorThree(stringHex) {
   setColorIndex(stringHex, "three")
 };
 
-
-
 var hexes = [
   "#006688",
   "#009977",
@@ -42,8 +43,8 @@ var hexes = [
 
 var hexIndex = 0;
 
+//test loop to cycle through colors
 var funcLoop = function() {
-
   setColorOne(hexes[(hexIndex++) % hexes.length]);
   setColorTwo(hexes[(hexIndex + 1) % hexes.length]);
   setColorThree(hexes[(hexIndex + 2) % hexes.length]);
