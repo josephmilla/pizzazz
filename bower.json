@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4",
-    "bower": "*"
+    "bower": "*",
+    "foundation": "zurb/bower-foundation"
   }
 }
