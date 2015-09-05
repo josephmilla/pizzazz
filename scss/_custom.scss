@@ -24,6 +24,21 @@ p {
   margin: 0 0 23px 0;
 }
 
+.relative {
+  display: relative;
+  z-index: 1;
+}
+
+#logo {
+  width: 100px;
+  height: 100px;
+  z-index: 100;
+  display: absolute;
+  left: 100px;
+  top: 50px;
+  float: left;
+}
+
 .input-hex {
   clear: right;
   display: inline-block !important;
