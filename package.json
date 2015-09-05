@@ -1,0 +1,28 @@
+{
+  "name": "pizzazz",
+  "version": "1.0.0",
+  "description": "Color your life",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephmilla/pizzazz.git"
+  },
+  "keywords": [
+    "pizzazz",
+    "design",
+    "color"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephmilla/pizzazz/issues"
+  },
+  "homepage": "https://github.com/josephmilla/pizzazz#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "node-static": "^0.7.7"
+  }
+}
