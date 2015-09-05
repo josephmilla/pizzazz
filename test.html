@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation</title>
+    <title>Pizzazz</title>
     <link rel="stylesheet" href="css/app.css" />
     <script src="bower_components/modernizr/modernizr.js"></script>
   </head>
   <body>
     <div class="row">
       <div class="small-12 medium-6 columns">
-        <div class="height-full-medium-up">
+        <div class="height-full">
           <div class="height-third">&nbsp;</div>
           <center>
             <h1>Colors matter.</h1>
@@ -35,5 +35,20 @@
         </div>
       </div>
     </div>
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+      $.ajax({
+        url: 'http://pizzazz.xyz:8081/test',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          color: '#000000'
+        },
+        success: function(result) {
+          console.log('Data was sent');
+        }
+      });
+    </script>
   </body>
 </html>
