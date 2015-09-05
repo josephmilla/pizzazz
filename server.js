@@ -86,7 +86,7 @@ app.get(analogousEndpoint, function(req, res, next) {
     var resultJSON = {
       'endpoint' : analogousEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
-      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+      'result' : ((result && color) ? result : 'Sorry, no analogous color defined')
     };
 
     res.render('index', { title: endpointIndexTitle + analogousEndpoint });
@@ -114,7 +114,7 @@ app.get(triadEndpoint, function(req, res, next) {
     var resultJSON = {
       'endpoint' : triadEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
-      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+      'result' : ((result && color) ? result : 'Sorry, no triad color defined')
     };
 
     res.render('index', { title: endpointIndexTitle + triadEndpoint });
@@ -142,7 +142,7 @@ app.get(splitEndpoint, function(req, res, next) {
     var resultJSON = {
       'endpoint' : splitEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
-      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+      'result' : ((result && color) ? result : 'Sorry, no split-complimentary color defined')
     };
 
     res.render('index', { title: endpointIndexTitle + splitEndpoint });
@@ -171,7 +171,7 @@ app.get(rectangleEndpoint, function(req, res, next) {
     var resultJSON = {
       'endpoint' : rectangleEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
-      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+      'result' : ((result && color) ? result : 'Sorry, no rectangle color defined')
     };
 
     res.render('index', { title: endpointIndexTitle + rectangleEndpoint });
@@ -199,7 +199,7 @@ app.get(squareEndpoint, function(req, res, next) {
     var resultJSON = {
       'endpoint' : squareEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
-      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+      'result' : ((result && color) ? result : 'Sorry, no square color defined')
     };
 
     res.render('index', { title: endpointIndexTitle + squareEndpoint });
