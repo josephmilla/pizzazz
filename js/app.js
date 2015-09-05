@@ -41,7 +41,7 @@ function setColorScheme(arrayScheme) {
 }
 
 var hexCombinations = [
-  ["#acc7dc", "#d6dde3", "#ffffff"],
+  ["#f48b52", "#b1dfd5", "#f5f6fa"],
   ["#f4858e", "#bfe2ca", "#a6daef"],
   ["#676c7f", "#ca8799", "#e1d5bf"]
 ];
