@@ -23,10 +23,14 @@ app.get('/api/test', function(req, res, next) {
     console.log('/api/test');
     next();
   }, function (req, res) {
-    res.send('Hello, world! Testicular test!');
-    var data = req.query;
-    var color = data.color;
-    console.log(color);
+    var resultJSON = {
+      'endpoint' : '/api/test',
+      'result' : 'Hello, world! Testicular test!'
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
@@ -38,10 +42,18 @@ app.get('/api/complementary', function(req, res, next) {
     console.log('/api/complementary');
     next();
   }, function (req, res) {
-    res.send('Complementary');
     var data = req.query;
     var color = data.color;
-    console.log(color);
+    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var resultJSON = {
+      'endpoint' : '/api/complementary',
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
@@ -53,10 +65,18 @@ app.get('/api/analogous', function(req, res, next) {
     console.log('/api/analogous');
     next();
   }, function (req, res) {
-    res.send('Analogous');
     var data = req.query;
     var color = data.color;
-    console.log(color);
+    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var resultJSON = {
+      'endpoint' : '/api/analogous',
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
@@ -68,10 +88,18 @@ app.get('/api/triad', function(req, res, next) {
     console.log('/api/triad');
     next();
   }, function (req, res) {
-    res.send('Triad');
     var data = req.query;
     var color = data.color;
-    console.log(color);
+    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var resultJSON = {
+      'endpoint' : '/api/triad',
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
@@ -83,10 +111,18 @@ app.get('/api/split', function(req, res, next) {
     console.log('/api/split');
     next();
   }, function (req, res) {
-    res.send('Split');
     var data = req.query;
     var color = data.color;
-    console.log(color);
+    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var resultJSON = {
+      'endpoint' : '/api/split',
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
@@ -98,10 +134,18 @@ app.get('/api/rectangle', function(req, res, next) {
     console.log('/api/rectangle');
     next();
   }, function (req, res) {
-    res.send('Rectangle');
     var data = req.query;
     var color = data.color;
-    console.log(color);
+    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var resultJSON = {
+      'endpoint' : '/api/rectangle',
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
@@ -113,10 +157,18 @@ app.get('/api/square', function(req, res, next) {
     console.log('/api/square');
     next();
   }, function (req, res) {
-    res.send('Square');
     var data = req.query;
     var color = data.color;
-    console.log(color);
+    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var resultJSON = {
+      'endpoint' : '/api/square',
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 app.listen(8081);
