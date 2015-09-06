@@ -121,3 +121,5 @@ function setSquare() {
 setComplementary();
 setAnalogous();
 setTriad();
+setSplit();
+setSquare();
