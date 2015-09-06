@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/josephmilla/pizzazz#readme",
   "dependencies": {
+    "color-thief": "file:color-thief",
     "express": "^4.13.3",
     "forever": "^0.15.1",
     "grunt": "~0.4.5",
