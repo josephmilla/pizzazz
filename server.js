@@ -143,11 +143,11 @@ app.get(splitEndpoint, function(req, res, next) {
   }, function (req, res) {
     var data = req.query;
     var color = tinyColor(data.color);
-    var result = color.splitcompliment().map(function(t) { return t.toHexString(); });
+    var result = color.splitcomplement().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : splitEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
-      'result' : ((result && color) ? result : 'Sorry, no split-complimentary color defined')
+      'result' : ((result && color) ? result : 'Sorry, no split-complementary color defined')
     };
 
     res.setHeader('Content-Type', 'application/json');
