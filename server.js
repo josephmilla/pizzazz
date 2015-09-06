@@ -89,7 +89,7 @@ app.get(analogousEndpoint, function(req, res, next) {
   }, function (req, res) {
     var data = req.query;
     var color = tinyColor(data.color);
-    var result = color.analogous();
+    var result = color.analogous().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : analogousEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
@@ -116,7 +116,7 @@ app.get(triadEndpoint, function(req, res, next) {
   }, function (req, res) {
     var data = req.query;
     var color = tinyColor(data.color);
-    var result = color.triad();
+    var result = color.triad().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : triadEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
@@ -143,7 +143,7 @@ app.get(splitEndpoint, function(req, res, next) {
   }, function (req, res) {
     var data = req.query;
     var color = tinyColor(data.color);
-    var result = color.splitcompliment();
+    var result = color.splitcompliment().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : splitEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
@@ -171,7 +171,7 @@ app.get(rectangleEndpoint, function(req, res, next) {
   }, function (req, res) {
     var data = req.query;
     var color = tinyColor(data.color);
-    var result = color.tetrad();
+    var result = color.tetrad().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : rectangleEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
@@ -184,32 +184,29 @@ app.get(rectangleEndpoint, function(req, res, next) {
 });
 
 /**
-* Square Endpoint
-* @description: Square -- The square color scheme is similar to the rectangle, but with all four colors spaced evenly around the color circle.
-* The square color scheme works best if you let one color be dominant.
-* You should also pay attention to the balance between warm and cool colors in your design.
+* Monochromatic Endpoint
+* @description: Monochromatic
 * @param: Color Hex Code (i.e. #000000)
-* @return: Square Color Hex Codes
+* @return: Monochromatic Color Hex Codes
 **/
-// var squareEndpoint = '/api/square';
-// app.get(squareEndpoint, function(req, res, next) {
-//     console.log(squareEndpoint);
-//     next();
-//   }, function (req, res) {
-//     var data = req.query;
-//     var color = tinyColor(data.color);
-//     var result = color.tetrad();
-//     var resultJSON = {
-//       'endpoint' : squareEndpoint,
-//       'color' : (color ? color : 'Sorry, no color defined'),
-//       'result' : ((result && color) ? result : 'Sorry, no square color defined')
-//     };
-//
-//     res.render('index', { title: endpointIndexTitle + squareEndpoint });
-//     res.setHeader('Content-Type', 'application/json');
-//     res.send(JSON.stringify(resultJSON, null, 3));
-//     console.log(JSON.stringify(resultJSON, null, 3));
-// });
+var monochromaticEndpoint = '/api/monochromatic';
+app.get(monochromaticEndpoint, function(req, res, next) {
+    console.log(monochromaticEndpoint);
+    next();
+  }, function (req, res) {
+    var data = req.query;
+    var color = tinyColor(data.color);
+    var result = color.monochromatic().map(function(t) { return t.toHexString(); });
+    var resultJSON = {
+      'endpoint' : monochromaticEndpoint,
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no square color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
+});
 
 /**
 * ================
