@@ -95,7 +95,7 @@ function setAnalogous() {
 
 function setTriad() {
   $(".color-triad-a").css('background-color', theColor);
-  endpointForResponse("split?color=" + noHex(theColor), function(json) {
+  endpointForResponse("triad?color=" + noHex(theColor), function(json) {
     $(".color-triad-b").css('background-color', json.result[1].toString());
     $(".color-triad-c").css('background-color', json.result[2].toString());
   }); 
