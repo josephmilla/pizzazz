@@ -109,10 +109,25 @@ p {
   transition: background-color 500ms linear;
 }
 
+.smaller-vertical-spacer {
+  width: 100%;
+  height: 80px;
+
+  @media #{$medium-up} {
+    height: 120px;
+  }
+}
+
 .small-vertical-spacer {
   width: 100%;
   height: 100px;
+
+  @media #{$medium-up} {
+    height: 200px;
+  }
 }
+
+
 
 .height-third-medium-up {
   width: 100%;
