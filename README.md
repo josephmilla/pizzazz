@@ -3,7 +3,7 @@
 
 ![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/pizzazz.png)
 ![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.36.png)
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.56.png)
+![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.51.png)
 
 ## Inspiration
 
