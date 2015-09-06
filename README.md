@@ -1,6 +1,10 @@
 # Pizzazz
 :stuck_out_tongue: A design tool that dynamically generates color schemes and design recommendations for user-generated content
 
+![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/pizzazz.png)
+![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.36.png)
+![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.56.png)
+
 ## Inspiration
 
 Behind each design a designer makes exists a purpose and intent. While developing our previous idea, an automated idea board that provides you with inspiration based on semantic keywords, we realized there is no solution to dynamically create pleasing color schemes for arbitrary colors. Pizzazz is that solution.
