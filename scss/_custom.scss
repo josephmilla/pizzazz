@@ -77,6 +77,11 @@ p {
   font-size: 16px;
 }
 
+.font-code-label {
+  @extend .font-code;
+  margin-top: 20px;
+}
+
 .block-label-parent {
   background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
