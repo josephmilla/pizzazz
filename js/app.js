@@ -73,7 +73,7 @@ function noHex(string) {
   return string.substring(1, string.length);
 }
 
-var theColor = "#ff69b4";
+var theColor = "#a6daef";
 
 function setComplementary() {
   $(".color-complementary-a").css('background-color', theColor);
@@ -90,7 +90,7 @@ function setAnalogous() {
     $(".color-analogous-d").css('background-color', json.result[3].toString());
     $(".color-analogous-e").css('background-color', json.result[4].toString());
     $(".color-analogous-f").css('background-color', json.result[5].toString());
-  }); 
+  });
 }
 
 function setTriad() {
@@ -98,7 +98,7 @@ function setTriad() {
   endpointForResponse("triad?color=" + noHex(theColor), function(json) {
     $(".color-triad-b").css('background-color', json.result[1].toString());
     $(".color-triad-c").css('background-color', json.result[2].toString());
-  }); 
+  });
 }
 
 function setSplit() {
@@ -106,7 +106,7 @@ function setSplit() {
   endpointForResponse("split?color=" + noHex(theColor), function(json) {
     $(".color-split-b").css('background-color', json.result[1].toString());
     $(".color-split-c").css('background-color', json.result[2].toString());
-  });   
+  });
 }
 
 function setSquare() {
@@ -115,7 +115,7 @@ function setSquare() {
     $(".color-rectangle-b").css('background-color', json.result[1].toString());
     $(".color-rectangle-c").css('background-color', json.result[2].toString());
     $(".color-rectangle-d").css('background-color', json.result[3].toString());
-  });   
+  });
 }
 
 setComplementary();
