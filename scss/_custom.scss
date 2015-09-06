@@ -17,11 +17,31 @@ h2 {
   margin: 0 0 23px 0;
 }
 
+h3 {
+  @extend h1;
+  line-height: 24px !important;
+  font-size: 24px !important;;
+}
+
 p {
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   line-height: 23px;
   margin: 0 0 23px 0;
+}
+
+.box-sample {
+  min-height: 300px !important;
+}
+
+.table-sample {
+  border-collapse: collapse;
+  border: 0;
+}
+
+.table-sample td {
+  padding: 0;
+  margin: 0;
 }
 
 .relative {
@@ -81,6 +101,11 @@ p {
   transition: background-color 500ms linear;
 }
 
+.small-vertical-spacer {
+  width: 100%;
+  height: 100px;
+}
+
 .height-third-medium-up {
   width: 100%;
   
@@ -89,7 +114,7 @@ p {
   }
 
   @media #{$small-only} {
-    height: 0vh;
+    height: 5vh;
   }
 }
 
@@ -106,6 +131,26 @@ p {
 .height-third {
   width: 100%;
   height: 33.35%;
+}
+
+.box-color {
+  width: 75px;
+  height: 75px;
+  background-color: #222;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.color-a {
+  background-color: #787878;
+}
+
+.color-b {
+  background-color: #888888;
+}
+
+.color-c {
+  background-color: #989898;
 }
 
 #color-one-block {
