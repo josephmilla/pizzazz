@@ -73,11 +73,13 @@ function noHex(string) {
   return string.substring(1, string.length);
 }
 
-var theColor = "#f4858e";
+var theColor = "#ff69b4";
 function setComplementary() {
-  $("#color-complementary-a").css('background-color', theColor);
+  $(".color-complementary-a").css('background-color', theColor);
   endpointForResponse("complementary?color=" + noHex(theColor), function(json) {
-    $("color-complementary-b").css('background-color', json.result);
+    $(".color-complementary-b").css('background-color', json.result.toString());
+    console.log("json: " + json.toString());
+    console.log("json.result: " + json.result);
   });
 }
 
