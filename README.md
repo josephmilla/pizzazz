@@ -13,11 +13,11 @@ Behind each design a designer makes exists a purpose and intent. While developin
 
 Pizzazz is a robust API that is built to dynamically adapt your interface to match user-generated content. It makes the lives of developers easier by providing a tool for generating color schemes, and design recommendations effortlessly.
 
-## How I built it
+## How we built it
 
 It is built using a Node.JS server that runs algorithms to determine the right combinations to “pizzazz” your life. The frontend uses SASS and jQuery, with Foundation powering the grid layout.
 
-## Challenges I ran into
+## Challenges we ran into
 
 Integration of separately developed modules is often times the most difficult part of projects. Pizzazz was no exception. The process of linking the front-end with the back-end led us discover a great deal of problems with each of our codes and required a number of quick’n’dirty changes to get right.
 
