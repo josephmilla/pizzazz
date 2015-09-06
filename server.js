@@ -14,6 +14,13 @@ require('http').createServer(function (request, response) {
 var express = require('express');
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 console.log("Starting server now...");
 console.log("Server started, waiting for new connection...");
 

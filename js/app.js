@@ -14,6 +14,20 @@ function getTriad(color) {
   });
 }
 
+function forResponse(url, callback) {
+  $.ajax({
+    url: url,
+    cache: false,
+    success: callback,
+    error: function(err) {
+      console.log(err);
+    }
+  });
+}
+function endpointForResponse(url, callback) {
+  forResponse("http://pizzazz.xyz/api/" + url, callback);
+}
+
 //getTriad();
 
 function setColorIndex(stringHex, index) {
@@ -46,18 +60,25 @@ var hexCombinations = [
   ["#676c7f", "#ca8799", "#e1d5bf"]
 ];
 var hexIndex = 0;
+var loopHandle;
 
 //test loop to cycle through colors
 var funcLoop = function() {
-/*  setColorOne(hexes[(hexIndex++) % hexes.length]);
-  setColorTwo(hexes[(hexIndex + 1) % hexes.length]);
-  setColorThree(hexes[(hexIndex + 2) % hexes.length]);*/
-
   setColorScheme(hexCombinations[hexIndex++ % hexCombinations.length]);
-  setTimeout(funcLoop, 3500);
+  loopHandle = setTimeout(funcLoop, 3500);
 }
-
 funcLoop();
 
+function noHex(string) {
+  return string.substring(1, string.length);
+}
 
+var theColor = "#f4858e";
+function setComplementary() {
+  $("#color-complementary-a").css('background-color', theColor);
+  endpointForResponse("complementary?color=" + noHex(theColor), function(json) {
+    $("color-complementary-b").css('background-color', json.result);
+  });
+}
 
+setComplementary();
