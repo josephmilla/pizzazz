@@ -101,6 +101,23 @@ function setTriad() {
   }); 
 }
 
+function setSplit() {
+  $(".color-split-a").css('background-color', theColor);
+  endpointForResponse("split?color=" + noHex(theColor), function(json) {
+    $(".color-split-b").css('background-color', json.result[1].toString());
+    $(".color-split-c").css('background-color', json.result[2].toString());
+  });   
+}
+
+function setSquare() {
+  $(".color-rectangle-a").css('background-color', theColor);
+  endpointForResponse("rectangle?color=" + noHex(theColor), function(json) {
+    $(".color-rectangle-b").css('background-color', json.result[1].toString());
+    $(".color-rectangle-c").css('background-color', json.result[2].toString());
+    $(".color-rectangle-d").css('background-color', json.result[3].toString());
+  });   
+}
+
 setComplementary();
 setAnalogous();
 setTriad();
