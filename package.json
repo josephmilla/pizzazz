@@ -29,7 +29,6 @@
     "grunt-sass": "~0.18.0",
     "node-sass": "^2.0.1",
     "node-static": "^0.7.7",
-    "tinycolor2": "^1.1.2",
-    "color-thief": "~2.0.0"
+    "tinycolor2": "^1.1.2"
   }
 }
