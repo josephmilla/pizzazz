@@ -74,13 +74,33 @@ function noHex(string) {
 }
 
 var theColor = "#ff69b4";
+
 function setComplementary() {
   $(".color-complementary-a").css('background-color', theColor);
   endpointForResponse("complementary?color=" + noHex(theColor), function(json) {
     $(".color-complementary-b").css('background-color', json.result.toString());
-    console.log("json: " + json.toString());
-    console.log("json.result: " + json.result);
   });
 }
 
+function setAnalogous() {
+  $(".color-analogous-a").css('background-color', theColor);
+  endpointForResponse("analogous?color=" + noHex(theColor), function(json) {
+    $(".color-analogous-b").css('background-color', json.result[1].toString());
+    $(".color-analogous-c").css('background-color', json.result[2].toString());
+    $(".color-analogous-d").css('background-color', json.result[3].toString());
+    $(".color-analogous-e").css('background-color', json.result[4].toString());
+    $(".color-analogous-f").css('background-color', json.result[5].toString());
+  }); 
+}
+
+function setTriad() {
+  $(".color-triad-a").css('background-color', theColor);
+  endpointForResponse("split?color=" + noHex(theColor), function(json) {
+    $(".color-triad-b").css('background-color', json.result[1].toString());
+    $(".color-triad-c").css('background-color', json.result[2].toString());
+  }); 
+}
+
 setComplementary();
+setAnalogous();
+setTriad();
