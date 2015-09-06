@@ -14,7 +14,10 @@ require('http').createServer(function (request, response) {
 var express = require('express');
 var app = express();
 
-var endpointIndexTitle = 'Pizzazz API &middot; ';
+console.log("Starting server now...");
+console.log("Server started, waiting for new connection...");
+
+var tinyColor = require('tinycolor2');
 
 /**
 * Test Endpoint
@@ -31,11 +34,16 @@ app.get(testEndpoint, function(req, res, next) {
       'result' : 'Hello, world! Testicular test!'
     };
 
-    res.render('index', { title: endpointIndexTitle + testEndpoint });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));
 });
+
+/**
+* ============
+* COLOR THEORY
+* ============
+**/
 
 /**
 * Complementary Endpoint
@@ -52,15 +60,14 @@ app.get(complementaryEndpoint, function(req, res, next) {
     next();
   }, function (req, res) {
     var data = req.query;
-    var color = data.color;
-    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var color = tinyColor(data.color);
+    var result = color.complement().toHexString();
     var resultJSON = {
       'endpoint' : complementaryEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
       'result' : ((result && color) ? result : 'Sorry, no complementary color defined')
     };
 
-    res.render('index', { title: endpointIndexTitle + complementaryEndpoint });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));
@@ -81,15 +88,14 @@ app.get(analogousEndpoint, function(req, res, next) {
     next();
   }, function (req, res) {
     var data = req.query;
-    var color = data.color;
-    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var color = tinyColor(data.color);
+    var result = color.analogous().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : analogousEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
       'result' : ((result && color) ? result : 'Sorry, no analogous color defined')
     };
 
-    res.render('index', { title: endpointIndexTitle + analogousEndpoint });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));
@@ -109,15 +115,14 @@ app.get(triadEndpoint, function(req, res, next) {
     next();
   }, function (req, res) {
     var data = req.query;
-    var color = data.color;
-    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var color = tinyColor(data.color);
+    var result = color.triad().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : triadEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
       'result' : ((result && color) ? result : 'Sorry, no triad color defined')
     };
 
-    res.render('index', { title: endpointIndexTitle + triadEndpoint });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));
@@ -137,15 +142,14 @@ app.get(splitEndpoint, function(req, res, next) {
     next();
   }, function (req, res) {
     var data = req.query;
-    var color = data.color;
-    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var color = tinyColor(data.color);
+    var result = color.splitcompliment().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : splitEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
       'result' : ((result && color) ? result : 'Sorry, no split-complimentary color defined')
     };
 
-    res.render('index', { title: endpointIndexTitle + splitEndpoint });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));
@@ -166,43 +170,95 @@ app.get(rectangleEndpoint, function(req, res, next) {
     next();
   }, function (req, res) {
     var data = req.query;
-    var color = data.color;
-    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var color = tinyColor(data.color);
+    var result = color.tetrad().map(function(t) { return t.toHexString(); });
     var resultJSON = {
       'endpoint' : rectangleEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
       'result' : ((result && color) ? result : 'Sorry, no rectangle color defined')
     };
 
-    res.render('index', { title: endpointIndexTitle + rectangleEndpoint });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));
 });
 
 /**
-* Square Endpoint
-* @description: Square -- The square color scheme is similar to the rectangle, but with all four colors spaced evenly around the color circle.
-* The square color scheme works best if you let one color be dominant.
-* You should also pay attention to the balance between warm and cool colors in your design.
+* Monochromatic Endpoint
+* @description: Monochromatic
 * @param: Color Hex Code (i.e. #000000)
-* @return: Square Color Hex Codes
+* @return: Monochromatic Color Hex Codes
 **/
-var squareEndpoint = '/api/square';
-app.get(squareEndpoint, function(req, res, next) {
-    console.log(squareEndpoint);
+var monochromaticEndpoint = '/api/monochromatic';
+app.get(monochromaticEndpoint, function(req, res, next) {
+    console.log(monochromaticEndpoint);
     next();
   }, function (req, res) {
     var data = req.query;
-    var color = data.color;
-    var result = ('000000' + (('0xffffff' ^ 'color').toString(16))).slice(-6);
+    var color = tinyColor(data.color);
+    var result = color.monochromatic().map(function(t) { return t.toHexString(); });
     var resultJSON = {
-      'endpoint' : squareEndpoint,
+      'endpoint' : monochromaticEndpoint,
       'color' : (color ? color : 'Sorry, no color defined'),
       'result' : ((result && color) ? result : 'Sorry, no square color defined')
     };
 
-    res.render('index', { title: endpointIndexTitle + squareEndpoint });
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
+});
+
+/**
+* ================
+* COLOR CONVERSION
+* ================
+**/
+
+/**
+* toHSV Endpoint
+* @description
+* @param
+* @return
+**/
+var toHSVEndpoint = '/api/tohsv';
+app.get(toHSVEndpoint, function(req, res, next) {
+    console.log(toHSVEndpoint);
+    next();
+  }, function (req, res) {
+    var data = req.query;
+    var color = tinyColor(data.color);
+    var result = color.toHsv();
+    var resultJSON = {
+      'endpoint' : toHSVEndpoint,
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no HSV color defined')
+    };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
+});
+
+/**
+* toRGB Endpoint
+* @description
+* @param
+* @return
+**/
+var toRGBEndpoint = '/api/torgb';
+app.get(toRGBEndpoint, function(req, res, next) {
+    console.log(toRGBEndpoint);
+    next();
+  }, function (req, res) {
+    var data = req.query;
+    var color = tinyColor(data.color);
+    var result = color.toRgb();
+    var resultJSON = {
+      'endpoint' : toRGBEndpoint,
+      'color' : (color ? color : 'Sorry, no color defined'),
+      'result' : ((result && color) ? result : 'Sorry, no RGB color defined')
+    };
+
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultJSON, null, 3));
     console.log(JSON.stringify(resultJSON, null, 3));

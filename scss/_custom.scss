@@ -65,6 +65,7 @@ p {
   box-sizing: auto !important;
   width: auto !important;
   font-family: 'Inconsolata', serif;
+  text-align: center;
 }
 
 .inline {
@@ -94,7 +95,7 @@ p {
   bottom: 0;
   right: 0;
   font-size: 32px;
-  padding: 20px;  
+  padding: 20px;
 }
 
 .block-color {
@@ -113,7 +114,7 @@ p {
 
 .height-third-medium-up {
   width: 100%;
-  
+
   @media #{$medium-up} {
     height: 30vh;
   }
