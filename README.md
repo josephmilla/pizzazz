@@ -1,40 +1,82 @@
 # Pizzazz
 :stuck_out_tongue: A design tool that dynamically generates color schemes and design recommendations for user-generated content
 
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/pizzazz.png)
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.36.png)
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.51.png)
+![Pizzazz](img/pizzazz.png)
+![Pizzazz](img/Screenshot%202015-09-06%2007.48.36.png)
+![Pizzazz](img/Screenshot%202015-09-06%2007.48.51.png)
 
-## Inspiration
+## 1. Abstract
+### 1.1. Project Purpose
+Behind each design a designer makes exists a purpose and intent. While developing a previous idea, an automated idea board that provides you with inspiration based on semantic keywords, it has been realized that there is no solution to dynamically create pleasing color schemes for arbitrary colors. Pizzazz is that solution.
 
-Behind each design a designer makes exists a purpose and intent. While developing our previous idea, an automated idea board that provides you with inspiration based on semantic keywords, we realized there is no solution to dynamically create pleasing color schemes for arbitrary colors. Pizzazz is that solution.
+### 1.2. Background/Motivation
+As a designer at heart, I have been faced with a lot of issues when it comes to designing and creating projects due to the lack of tools that are easy to use. Dynamically creating color schemes, at the very least, should be as easy as calling an API.
 
-## What it does
+## 2. Technical Specifications
+### 2.1. Platform
+Pizzazz is a robust API that is built to dynamically adapt your interface to match user-generated content. It makes the lives of developers easier by providing a tool for generating color schemes, and design recommendations effortlessly. It will be built using a Node.JS server that runs algorithms to determine the right combinations to “pizzazz” your life.
 
-Pizzazz is a robust API that is built to dynamically adapt your interface to match user-generated content. It makes the lives of developers easier by providing a tool for generating color schemes, and design recommendations effortlessly.
+### 2.2. Programming Languages
+JavaScript, Python, HTML/CSS
 
-## How we built it
+### 2.3. Stylistic Conventions
+JavaScript Style Guide: https://google.github.io/styleguide/javascriptguide.xml
 
-It is built using a Node.JS server that runs algorithms to determine the right combinations to “pizzazz” your life. The frontend uses SASS and jQuery, with Foundation powering the grid layout.
+Python Style Guide: https://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
-## Challenges we ran into
+HTML/CSS Style Guide: https://google.github.io/styleguide/htmlcssguide.xml
+### 2.4. SDK
+API: Express.JS + Node.JS
 
-Integration of separately developed modules is often times the most difficult part of projects. Pizzazz was no exception. The process of linking the front-end with the back-end led us discover a great deal of problems with each of our codes and required a number of quick’n’dirty changes to get right.
+Client: "Isomorphic" Web Application - React.JS, Express, Flux, etc.
 
-## Accomplishments that we’re proud of
+### 2.5. IDE
+Atom, PyCharm
 
-Our design tool wouldn’t be perfect if it didn’t have a crisp and beautiful design. And it does.
+### 2.6. Tools/Interface
+Google Chrome, Atom, PyCharm, iTerm, DigitalOcean/AWS
 
-In addition, it is our first time working as a team. We accomplished a great deal when taking into account that we pivoted to this idea in the last third of the hackathon.
+### 2.7. TargetAudience
+Designers, Programmers, Enthusiasts
 
-## What we learned
+## 3. Functional Specifications
+### 3.1. Features
+The project will include but not limited to the following:
+- Make color combinations through an API call
+  - Complementary - Analogous
+  - Triad
+  - Split
+  - Rectangle
+- Dynamically get a color palette using an image
+- Dynamically get a color palette using a website
+  - Get the colors that occurs the most
+- Randomly generate a color palette
+- Generate a color palette based on keywords through semantic analysis
+  - "Sad" would turn into dark colors (gray, black)
 
-We learned that it’s better to go to a hackathon with a more solid idea of what we wanted to do. In addition, a hacks in the intersection of two areas (design & development) have great potential.
+### 3.2. Scope of the Project
+- Node.JS API
+- Web client for visualization
+- 4 Weeks
 
-## What's next for Pizzazz
+## 4. Timeline
+### 4.1. Week 1
+- Make a landing page
+- Set up server
+- Generate the color combinations - Set up API
 
-Pizzazz is a tool for developing color schemas to match user-generated content. Next steps include API endpoints to analyze images and videos to extract dominant colors and create color schemas based on that.
+### 4.2. Week 2
+- Generate a color palette randomly
+- Dynamically get a color palette using an image
 
-The future of Pizzazz also lies in semantic driven design. We wish to instantly create color schemas based on semantic keywords. Imagine querying an api with “royal” or “modern” and getting relevant color sets.
+### 4.3. Week 3
+- Generate a color palette through semantic analysis - Add more documentation
 
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/queenb.gif)
+### 4.4. Week 4
+- Generate a color palette using a website - Polishing
+(*) Subject to change
+
+## 5. Future Enhancements
+I'd like to make the service available on mobile in the future. I believe, if React is used properly, the transition from a web platform to mobile would be easier.
+
+![Pizzazz](img/queenb.gif)
