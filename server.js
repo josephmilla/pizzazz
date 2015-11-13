@@ -300,8 +300,8 @@ app.get(toRGBEndpoint, function(req, res, next) {
  **/
 
 /**
- * image Endpoint
- * @description image -- Gets the imageInfo and dominant color of a given source image
+ * imageInfo Endpoint
+ * @description imageInfo -- Gets the imageInfo and dominant color of a given source image
  * @param: Source Image (i.e. .jpg, .png, etc.)
  * @return: imageInfo JSON, Color in Hex Format (i.e. #000000)
  **/
@@ -350,7 +350,7 @@ app.get(imageEndpoint, function(req, res, next) {
 });
 
 /**
- * getRandomColor Endpoint
+ * randomColor Endpoint
  * @description getRandomColor -- Gets the 4 random colors
  * @param: None
  * @return: Color in Hex Format (i.e. #000000)
