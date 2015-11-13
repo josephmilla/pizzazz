@@ -33,6 +33,9 @@ var sentiment = require('sentiment');
 // File Handling
 var http = require('http');
 var fs = require('fs');
+var gm = require('gm').subClass({
+  imageMagick: true
+});
 
 /**
  * Test Endpoint
@@ -297,104 +300,53 @@ app.get(toRGBEndpoint, function(req, res, next) {
  **/
 
 /**
- * getDominantColor Endpoint
- * @description getDominantColor -- Gets the dominant color of a given source image
+ * image Endpoint
+ * @description image -- Gets the imageInfo and dominant color of a given source image
  * @param: Source Image (i.e. .jpg, .png, etc.)
- * @return: Color in Hex Format (i.e. #000000)
+ * @return: imageInfo JSON, Color in Hex Format (i.e. #000000)
  **/
-var getDominantColorEndpoint = '/api/getdominant';
-app.get(getDominantColorEndpoint, function(req, res, next) {
-  console.log(getDominantColorEndpoint);
+var imageEndpoint = '/api/image';
+app.get(imageEndpoint, function(req, res, next) {
+  console.log(imageEndpoint);
   next();
 }, function(req, res) {
   var data = req.query;
 
+  // Get imageURL
   var imageURL = data.url;
   console.log(imageURL);
 
-  var imageFile = fs.createWriteStream('img/imageFile.jpg');
+  // Set image path
+  var imagePath = 'img/imageFile.jpg';
+
+  // Load image locally
+  var imageFile = fs.createWriteStream(imagePath);
   var request = http.get(imageURL, function(response) {
     response.pipe(imageFile);
   });
 
-  // Read file
-  // var sourceImage;
-  // fs.readFile('cutepuppy.jpg', 'utf8', function(err, data) {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  //   console.log(data);
-  //   sourceImage = data;
-  // });
+  // Get imageInfo
+  gm(imageURL).identify(function(err, value) {
+    console.log('imageInfo: ' + value);
+    var imageInfo = value;
 
-  // function getAverageColor(img) {
-  //   var canvas = document.createElement('canvas'),
-  //     context = canvas.getContext && canvas.getContext('2d'),
-  //     rgb = {
-  //       r: 102,
-  //       g: 102,
-  //       b: 102
-  //     }, // Set a base colour as a fallback for non-compliant browsers
-  //     pixelInterval = 5, // Rather than inspect every single pixel in the image inspect every 5th pixel
-  //     count = 0,
-  //     i = -4,
-  //     data, length;
-  //
-  //   // Return the base colour for non-compliant browsers
-  //   if (!context) {
-  //     return rgb;
-  //   }
-  //
-  //   // Set the height and width of the canvas element to that of the image
-  //   var height = canvas.height = img.naturalHeight || img.offsetHeight || img.height,
-  //     width = canvas.width = img.naturalWidth || img.offsetWidth || img.width;
-  //
-  //   context.drawImage(img, 0, 0);
-  //
-  //   try {
-  //     data = context.getImageData(0, 0, width, height);
-  //   } catch (e) {
-  //     // Catch errors - usually due to cross domain security issues
-  //     alert(e);
-  //     return rgb;
-  //   }
-  //
-  //   data = data.data;
-  //   length = data.length;
-  //   while ((i += pixelInterval * 4) < length) {
-  //     count++;
-  //     rgb.r += data[i];
-  //     rgb.g += data[i + 1];
-  //     rgb.b += data[i + 2];
-  //   }
-  //
-  //   // Floor the average values to give correct rgb values (ie: round number values)
-  //   rgb.r = Math.floor(rgb.r / count);
-  //   rgb.g = Math.floor(rgb.g / count);
-  //   rgb.b = Math.floor(rgb.b / count);
-  //
-  //   // Convert to Hex
-  //   var color = tinycolor(rgb);
-  //   if (color.isValid()) {
-  //     return color.toHexString();
-  //   }
-  //
-  //   return -1;
-  // }
+    var channelStats = imageInfo["Channel statistics"];
+    var redChannelMean = channelStats["Red"]["mean"];
+    var greenChannelMean = channelStats["Green"]["mean"];
+    var blueChannelMean = channelStats["Blue"]["mean"];
+    var dominantColor = tinyColor({ r: redChannelMean, g: greenChannelMean, b: blueChannelMean }).toHexString();
 
-  // var dominantColor = getAverageColor(sourceImage);
-  //
-  // var result = color;
-  var resultJSON = {
-    'endpoint': getDominantColorEndpoint,
-    'imageURL': (imageURL ? imageURL : 'Sorry, no imageURL defined'),
-    'imageFile': (imageFile ? imageFile : 'Sorry, no imageFile defined'),
-    // 'result': ((result && sourceImage) ? result : 'Sorry, no dominantColor defined')
-  };
+    var resultJSON = {
+      'endpoint': imageEndpoint,
+      'imageURL': (imageURL ? imageURL : 'Sorry, no imageURL defined'),
+      'imageInfo': (imageInfo ? imageInfo : 'Sorry, no imageInfo defined'),
+      'dominantColor': ((dominantColor && imageInfo && imageURL) ? dominantColor : 'Sorry, no dominantColor defined')
+    };
 
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(resultJSON, null, 3));
-  console.log(JSON.stringify(resultJSON, null, 3));
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
+  });
 });
 
 /**
