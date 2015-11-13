@@ -374,7 +374,7 @@ app.get(getDominantColorEndpoint, function(req, res, next) {
 
   var result = color;
   var resultJSON = {
-    'endpoint': monochromaticEndpoint,
+    'endpoint': getDominantColorEndpoint,
     'sourceImage': (sourceImage ? sourceImage : 'Sorry, no sourceImage defined'),
     'result': ((result && sourceImage) ? result : 'Sorry, no dominantColor defined')
   };
@@ -402,7 +402,7 @@ app.get(randomColorEndpoint, function(req, res, next) {
   });
 
   var resultJSON = {
-    'endpoint': monochromaticEndpoint,
+    'endpoint': randomColorEndpoint,
     'number': (number ? number : 'Sorry, no number of colors defined'),
     'result': ((result && number) ? result : 'Sorry, no colors defined')
   };
