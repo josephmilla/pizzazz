@@ -1,9 +1,9 @@
 # Pizzazz
 :stuck_out_tongue: A design tool that dynamically generates color schemes and design recommendations for user-generated content
 
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/pizzazz.png)
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.36.png)
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/Screenshot%202015-09-06%2007.48.51.png)
+![Pizzazz](img/pizzazz.png)
+![Pizzazz](img/Screenshot%202015-09-06%2007.48.36.png)
+![Pizzazz](img/Screenshot%202015-09-06%2007.48.51.png)
 
 ## Inspiration
 
@@ -37,4 +37,4 @@ Pizzazz is a tool for developing color schemas to match user-generated content. 
 
 The future of Pizzazz also lies in semantic driven design. We wish to instantly create color schemas based on semantic keywords. Imagine querying an api with “royal” or “modern” and getting relevant color sets.
 
-![Pizzazz](https://raw.githubusercontent.com/josephmilla/pizzazz/master/img/queenb.gif)
+![Pizzazz](img/queenb.gif)
