@@ -450,7 +450,6 @@ app.get(getSentimentColor, function(req, res, next) {
     console.log('sentimentScore > 0: ' + result);
   }
 
-
   var resultJSON = {
     'endpoint': getSentimentColor,
     'number': (sentimentScore ? sentimentScore : 'Sorry, no number of colors defined'),
