@@ -30,6 +30,7 @@
     "mocha": "^2.3.3",
     "node-sass": "^2.0.1",
     "node-static": "^0.7.7",
+    "pleasejs": "^0.4.2",
     "really-need": "^1.6.3",
     "supertest": "^1.1.0",
     "tinycolor2": "^1.1.2"
