@@ -30,7 +30,8 @@ var please = require('pleasejs')
 // Sentiment Analysis
 var sentiment = require('sentiment');
 
-// File Import
+// File Handling
+var http = require('http');
 var fs = require('fs');
 
 /**
@@ -308,78 +309,87 @@ app.get(getDominantColorEndpoint, function(req, res, next) {
 }, function(req, res) {
   var data = req.query;
 
-  // Read file
-  var sourceImage;
-  fs.readFile('cutepuppy.jpg', 'utf8', function(err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log(data);
-    sourceImage = data;
+  var imageURL = data.url;
+  console.log(imageURL);
+
+  var imageFile = fs.createWriteStream('img/imageFile.jpg');
+  var request = http.get(imageURL, function(response) {
+    response.pipe(imageFile);
   });
 
-  function getAverageColor(img) {
-    var canvas = document.createElement('canvas'),
-      context = canvas.getContext && canvas.getContext('2d'),
-      rgb = {
-        r: 102,
-        g: 102,
-        b: 102
-      }, // Set a base colour as a fallback for non-compliant browsers
-      pixelInterval = 5, // Rather than inspect every single pixel in the image inspect every 5th pixel
-      count = 0,
-      i = -4,
-      data, length;
+  // Read file
+  // var sourceImage;
+  // fs.readFile('cutepuppy.jpg', 'utf8', function(err, data) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  //   console.log(data);
+  //   sourceImage = data;
+  // });
 
-    // Return the base colour for non-compliant browsers
-    if (!context) {
-      return rgb;
-    }
+  // function getAverageColor(img) {
+  //   var canvas = document.createElement('canvas'),
+  //     context = canvas.getContext && canvas.getContext('2d'),
+  //     rgb = {
+  //       r: 102,
+  //       g: 102,
+  //       b: 102
+  //     }, // Set a base colour as a fallback for non-compliant browsers
+  //     pixelInterval = 5, // Rather than inspect every single pixel in the image inspect every 5th pixel
+  //     count = 0,
+  //     i = -4,
+  //     data, length;
+  //
+  //   // Return the base colour for non-compliant browsers
+  //   if (!context) {
+  //     return rgb;
+  //   }
+  //
+  //   // Set the height and width of the canvas element to that of the image
+  //   var height = canvas.height = img.naturalHeight || img.offsetHeight || img.height,
+  //     width = canvas.width = img.naturalWidth || img.offsetWidth || img.width;
+  //
+  //   context.drawImage(img, 0, 0);
+  //
+  //   try {
+  //     data = context.getImageData(0, 0, width, height);
+  //   } catch (e) {
+  //     // Catch errors - usually due to cross domain security issues
+  //     alert(e);
+  //     return rgb;
+  //   }
+  //
+  //   data = data.data;
+  //   length = data.length;
+  //   while ((i += pixelInterval * 4) < length) {
+  //     count++;
+  //     rgb.r += data[i];
+  //     rgb.g += data[i + 1];
+  //     rgb.b += data[i + 2];
+  //   }
+  //
+  //   // Floor the average values to give correct rgb values (ie: round number values)
+  //   rgb.r = Math.floor(rgb.r / count);
+  //   rgb.g = Math.floor(rgb.g / count);
+  //   rgb.b = Math.floor(rgb.b / count);
+  //
+  //   // Convert to Hex
+  //   var color = tinycolor(rgb);
+  //   if (color.isValid()) {
+  //     return color.toHexString();
+  //   }
+  //
+  //   return -1;
+  // }
 
-    // Set the height and width of the canvas element to that of the image
-    var height = canvas.height = img.naturalHeight || img.offsetHeight || img.height,
-      width = canvas.width = img.naturalWidth || img.offsetWidth || img.width;
-
-    context.drawImage(img, 0, 0);
-
-    try {
-      data = context.getImageData(0, 0, width, height);
-    } catch (e) {
-      // Catch errors - usually due to cross domain security issues
-      alert(e);
-      return rgb;
-    }
-
-    data = data.data;
-    length = data.length;
-    while ((i += pixelInterval * 4) < length) {
-      count++;
-      rgb.r += data[i];
-      rgb.g += data[i + 1];
-      rgb.b += data[i + 2];
-    }
-
-    // Floor the average values to give correct rgb values (ie: round number values)
-    rgb.r = Math.floor(rgb.r / count);
-    rgb.g = Math.floor(rgb.g / count);
-    rgb.b = Math.floor(rgb.b / count);
-
-    // Convert to Hex
-    var color = tinycolor(rgb);
-    if (color.isValid()) {
-      return color.toHexString();
-    }
-
-    return -1;
-  }
-
-  var dominantColor = getAverageColor(sourceImage);
-
-  var result = color;
+  // var dominantColor = getAverageColor(sourceImage);
+  //
+  // var result = color;
   var resultJSON = {
     'endpoint': getDominantColorEndpoint,
-    'sourceImage': (sourceImage ? sourceImage : 'Sorry, no sourceImage defined'),
-    'result': ((result && sourceImage) ? result : 'Sorry, no dominantColor defined')
+    'imageURL': (imageURL ? imageURL : 'Sorry, no imageURL defined'),
+    'imageFile': (imageFile ? imageFile : 'Sorry, no imageFile defined'),
+    // 'result': ((result && sourceImage) ? result : 'Sorry, no dominantColor defined')
   };
 
   res.setHeader('Content-Type', 'application/json');
@@ -440,12 +450,12 @@ app.get(getSentimentColor, function(req, res, next) {
   var sadColors = ['#0000FF', '#CCCCCC', '#000000', '#964B00'];
 
   // Darken or Lighten Color based on sentimentScore
-  if(sentimentScore.score <= 0) {
-    var sadColor = sadColors[Math.floor(Math.random()*sadColors.length)];
+  if (sentimentScore.score <= 0) {
+    var sadColor = sadColors[Math.floor(Math.random() * sadColors.length)];
     result = tinyColor(sadColor).darken().toString();
     console.log('sentimentScore <= 0: ' + result);
   } else {
-    var happyColor = happyColors[Math.floor(Math.random()*happyColors.length)];
+    var happyColor = happyColors[Math.floor(Math.random() * happyColors.length)];
     result = tinyColor(happyColor).lighten().toString();
     console.log('sentimentScore > 0: ' + result);
   }
