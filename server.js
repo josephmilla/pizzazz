@@ -352,7 +352,7 @@ app.get(imageEndpoint, function(req, res, next) {
 /**
  * randomColor Endpoint
  * @description getRandomColor -- Gets the 4 random colors
- * @param: None
+ * @param: Number of random colors wanted
  * @return: Color in Hex Format (i.e. #000000)
  **/
 var randomColorEndpoint = '/api/random';
@@ -380,7 +380,7 @@ app.get(randomColorEndpoint, function(req, res, next) {
 /**
  * getSentimentColor Endpoint
  * @description getRandomColor -- Gets the 4 random colors
- * @param: None
+ * @param: Text to analyze
  * @return: Color in Hex Format (i.e. #000000)
  **/
 var getSentimentColor = '/api/sentiment';
@@ -414,6 +414,52 @@ app.get(getSentimentColor, function(req, res, next) {
 
   var resultJSON = {
     'endpoint': getSentimentColor,
+    'number': (sentimentScore ? sentimentScore : 'Sorry, no number of colors defined'),
+    'result': ((result && sentimentScore) ? result : 'Sorry, no colors defined')
+  };
+
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(resultJSON, null, 3));
+  console.log(JSON.stringify(resultJSON, null, 3));
+});
+
+/**
+ * analyzeWebsite Endpoint
+ * @description analyzeWebsite -- Gets the top colors out of a website
+ * @param: Website URL
+ * @return: Color in Hex Format (i.e. #000000)
+ **/
+var analyzeWebsite = '/api/web';
+app.get(analyzeWebsite, function(req, res, next) {
+  console.log(analyzeWebsite);
+  next();
+}, function(req, res) {
+  var data = req.query;
+  var sentimentText = data.text;
+  var sentimentScore = sentiment(sentimentText);
+  var result = please.make_color({
+    golden: false,
+    full_random: true
+  });
+
+  console.log(result);
+
+  var happyColors = ['‎#00FF00', '#FFFF00', '#FF7F00', '#FFC0DB'];
+  var sadColors = ['#0000FF', '#CCCCCC', '#000000', '#964B00'];
+
+  // Darken or Lighten Color based on sentimentScore
+  if (sentimentScore.score <= 0) {
+    var sadColor = sadColors[Math.floor(Math.random() * sadColors.length)];
+    result = tinyColor(sadColor).darken().toString();
+    console.log('sentimentScore <= 0: ' + result);
+  } else {
+    var happyColor = happyColors[Math.floor(Math.random() * happyColors.length)];
+    result = tinyColor(happyColor).lighten().toString();
+    console.log('sentimentScore > 0: ' + result);
+  }
+
+  var resultJSON = {
+    'endpoint': analyzeWebsite,
     'number': (sentimentScore ? sentimentScore : 'Sorry, no number of colors defined'),
     'result': ((result && sentimentScore) ? result : 'Sorry, no colors defined')
   };
