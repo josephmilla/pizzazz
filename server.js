@@ -30,6 +30,9 @@ var please = require('pleasejs')
 // Sentiment Analysis
 var sentiment = require('sentiment');
 
+// Vibrant
+var vibrant = require('node-vibrant');
+
 // File Handling
 var http = require('http');
 var fs = require('fs');
@@ -339,7 +342,6 @@ app.get(imageEndpoint, function(req, res, next) {
     var resultJSON = {
       'endpoint': imageEndpoint,
       'imageURL': (imageURL ? imageURL : 'Sorry, no imageURL defined'),
-      'imageInfo': (imageInfo ? imageInfo : 'Sorry, no imageInfo defined'),
       'dominantColor': ((dominantColor && imageInfo && imageURL) ? dominantColor : 'Sorry, no dominantColor defined')
     };
 
@@ -440,39 +442,41 @@ app.get(analyzeWebsite, function(req, res, next) {
   var webURL = data.url;
   console.log(webURL);
 
-  /*
   // Set image path
   var imagePath = 'img/imageFile.jpg';
 
   // Load image locally
   var imageFile = fs.createWriteStream(imagePath);
-  var request = http.get(imageURL, function(response) {
+  var request = http.get(webURL, function(response) {
     response.pipe(imageFile);
   });
 
   // Get imageInfo
-  gm(imageURL).identify(function(err, value) {
+  gm(webURL).identify(function(err, value) {
     console.log('imageInfo: ' + value);
     var imageInfo = value;
 
-    var channelStats = imageInfo["Channel statistics"];
-    var redChannelMean = channelStats["Red"]["mean"];
-    var greenChannelMean = channelStats["Green"]["mean"];
-    var blueChannelMean = channelStats["Blue"]["mean"];
-    var dominantColor = tinyColor({ r: redChannelMean, g: greenChannelMean, b: blueChannelMean }).toHexString();
+    // Get color palette
+    vibrant.from(webURL).getPalette(function(err, palette) {
+      console.log(palette);
 
-    var resultJSON = {
-      'endpoint': analyzeWebsite,
-      'imageURL': (imageURL ? imageURL : 'Sorry, no imageURL defined'),
-      'imageInfo': (imageInfo ? imageInfo : 'Sorry, no imageInfo defined'),
-      'dominantColor': ((dominantColor && imageInfo && imageURL) ? dominantColor : 'Sorry, no dominantColor defined')
-    };
+      var channelStats = imageInfo["Channel statistics"];
+      var redChannelMean = channelStats["Red"]["mean"];
+      var greenChannelMean = channelStats["Green"]["mean"];
+      var blueChannelMean = channelStats["Blue"]["mean"];
+      var dominantColor = tinyColor({ r: redChannelMean, g: greenChannelMean, b: blueChannelMean }).toHexString();
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(resultJSON, null, 3));
-    console.log(JSON.stringify(resultJSON, null, 3));
+      var resultJSON = {
+        'endpoint': analyzeWebsite,
+        'webURL': (webURL ? webURL : 'Sorry, no webURL defined'),
+        'colorPallete': ((palette && webURL) ? palette : 'Sorry, no colorPallete defined')
+      };
+
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(resultJSON, null, 3));
+      console.log(JSON.stringify(resultJSON, null, 3));
+    });
   });
-  */
 });
 
 app.listen(8081);
