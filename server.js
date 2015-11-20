@@ -466,6 +466,11 @@ app.get(analyzeWebsite, function(req, res, next) {
     }
   }
 
+  /**
+  * TODO:
+  * - Optimize code, this whole request is taking 14 seconds
+  */
+
   // Take a screenshot of webpage
   webshot(webURL, imagePath, options, function(err) {
     console.log(err);
@@ -485,6 +490,10 @@ app.get(analyzeWebsite, function(req, res, next) {
         var blueChannelMean = channelStats["Blue"]["mean"];
         var dominantColor = tinyColor({ r: redChannelMean, g: greenChannelMean, b: blueChannelMean }).toHexString();
 
+        /**
+        * TODO:
+        * - This breaks when the image is a solid color
+        */
 
         var colorPalette = [
           palette["Vibrant"]["rgb"] ? tinyColor({ r: palette["Vibrant"]["rgb"][0], g: palette["Vibrant"]["rgb"][1], b: palette["Vibrant"]["rgb"][1] }).toHexString() : palette["Vibrant"]["rgb"],
