@@ -425,9 +425,9 @@ app.get(getSentimentColor, function(req, res, next) {
 
 /**
  * analyzeWebsite Endpoint
- * @description analyzeWebsite -- Gets the top colors out of a website
- * @param: Website URL
- * @return: Color in Hex Format (i.e. #000000)
+ * @description analyzeWebsite -- Gets the dominant colors of a website
+ * @param: Web URL
+ * @return: imageInfo JSON, Color in Hex Format (i.e. #000000)
  **/
 var analyzeWebsite = '/api/web';
 app.get(analyzeWebsite, function(req, res, next) {
@@ -435,38 +435,44 @@ app.get(analyzeWebsite, function(req, res, next) {
   next();
 }, function(req, res) {
   var data = req.query;
-  var sentimentText = data.text;
-  var sentimentScore = sentiment(sentimentText);
-  var result = please.make_color({
-    golden: false,
-    full_random: true
+
+  // Get webURL
+  var webURL = data.url;
+  console.log(webURL);
+
+  /*
+  // Set image path
+  var imagePath = 'img/imageFile.jpg';
+
+  // Load image locally
+  var imageFile = fs.createWriteStream(imagePath);
+  var request = http.get(imageURL, function(response) {
+    response.pipe(imageFile);
   });
 
-  console.log(result);
+  // Get imageInfo
+  gm(imageURL).identify(function(err, value) {
+    console.log('imageInfo: ' + value);
+    var imageInfo = value;
 
-  var happyColors = ['‎#00FF00', '#FFFF00', '#FF7F00', '#FFC0DB'];
-  var sadColors = ['#0000FF', '#CCCCCC', '#000000', '#964B00'];
+    var channelStats = imageInfo["Channel statistics"];
+    var redChannelMean = channelStats["Red"]["mean"];
+    var greenChannelMean = channelStats["Green"]["mean"];
+    var blueChannelMean = channelStats["Blue"]["mean"];
+    var dominantColor = tinyColor({ r: redChannelMean, g: greenChannelMean, b: blueChannelMean }).toHexString();
 
-  // Darken or Lighten Color based on sentimentScore
-  if (sentimentScore.score <= 0) {
-    var sadColor = sadColors[Math.floor(Math.random() * sadColors.length)];
-    result = tinyColor(sadColor).darken().toString();
-    console.log('sentimentScore <= 0: ' + result);
-  } else {
-    var happyColor = happyColors[Math.floor(Math.random() * happyColors.length)];
-    result = tinyColor(happyColor).lighten().toString();
-    console.log('sentimentScore > 0: ' + result);
-  }
+    var resultJSON = {
+      'endpoint': analyzeWebsite,
+      'imageURL': (imageURL ? imageURL : 'Sorry, no imageURL defined'),
+      'imageInfo': (imageInfo ? imageInfo : 'Sorry, no imageInfo defined'),
+      'dominantColor': ((dominantColor && imageInfo && imageURL) ? dominantColor : 'Sorry, no dominantColor defined')
+    };
 
-  var resultJSON = {
-    'endpoint': analyzeWebsite,
-    'number': (sentimentScore ? sentimentScore : 'Sorry, no number of colors defined'),
-    'result': ((result && sentimentScore) ? result : 'Sorry, no colors defined')
-  };
-
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(resultJSON, null, 3));
-  console.log(JSON.stringify(resultJSON, null, 3));
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(resultJSON, null, 3));
+    console.log(JSON.stringify(resultJSON, null, 3));
+  });
+  */
 });
 
 app.listen(8081);
