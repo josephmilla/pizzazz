@@ -461,8 +461,8 @@ app.get(analyzeWebsite, function(req, res, next) {
       height: 'all'
     },
     shotSize: {
-      width: 'window',
-      height: 'window'
+      width: 'all',
+      height: 'all'
     }
   }
 
