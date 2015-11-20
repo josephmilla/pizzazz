@@ -485,10 +485,20 @@ app.get(analyzeWebsite, function(req, res, next) {
         var blueChannelMean = channelStats["Blue"]["mean"];
         var dominantColor = tinyColor({ r: redChannelMean, g: greenChannelMean, b: blueChannelMean }).toHexString();
 
+
+        var colorPalette = [
+          palette["Vibrant"]["rgb"] ? tinyColor({ r: palette["Vibrant"]["rgb"][0], g: palette["Vibrant"]["rgb"][1], b: palette["Vibrant"]["rgb"][1] }).toHexString() : palette["Vibrant"]["rgb"],
+          palette["Muted"]["rgb"] ? tinyColor({ r: palette["Muted"]["rgb"][0], g: palette["Muted"]["rgb"][1], b: palette["Muted"]["rgb"][1] }).toHexString() : palette["Muted"]["rgb"],
+          palette["DarkVibrant"]["rgb"] ? tinyColor({ r: palette["DarkVibrant"]["rgb"][0], g: palette["DarkVibrant"]["rgb"][1], b: palette["DarkVibrant"]["rgb"][1] }).toHexString() : palette["DarkVibrant"]["rgb"],
+          palette["DarkMuted"]["rgb"] ? tinyColor({ r: palette["DarkMuted"]["rgb"][0], g: palette["DarkMuted"]["rgb"][1], b: palette["DarkMuted"]["rgb"][1] }).toHexString() : palette["DarkMuted"]["rgb"],
+          palette["LightVibrant"]["rgb"] ? tinyColor({ r: palette["LightVibrant"]["rgb"][0], g: palette["LightVibrant"]["rgb"][1], b: palette["LightVibrant"]["rgb"][1] }).toHexString() : palette["LightVibrant"]["rgb"],
+          palette["LightMuted"]["rgb"] ? tinyColor({ r: palette["LightMuted"]["rgb"][0], g: palette["LightMuted"]["rgb"][1], b: palette["LightMuted"]["rgb"][1] }).toHexString() : palette["LightMuted"]["rgb"]
+        ]
+
         var resultJSON = {
           'endpoint': analyzeWebsite,
           'webURL': (webURL ? webURL : 'Sorry, no webURL defined'),
-          'colorPallete': ((palette && webURL) ? palette : 'Sorry, no colorPallete defined')
+          'colorPalette': ((colorPalette && webURL) ? colorPalette : 'Sorry, no colorPalette defined')
         };
 
         res.setHeader('Content-Type', 'application/json');
