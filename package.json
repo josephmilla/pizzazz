@@ -36,6 +36,7 @@
     "really-need": "^1.6.3",
     "sentiment": "^1.0.2",
     "supertest": "^1.1.0",
-    "tinycolor2": "^1.1.2"
+    "tinycolor2": "^1.1.2",
+    "webshot": "^0.16.0"
   }
 }
