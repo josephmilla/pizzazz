@@ -140,3 +140,16 @@ describe('GET /api/sentiment', function() {
       .expect(200, done);
   })
 });
+
+/**
+ * Sentiment
+ */
+describe('GET /api/web', function() {
+  it('respond with json', function(done) {
+    this.timeout(30000);
+    request.get('/api/web/?url=http://makergirl.us/')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, done);
+  })
+});
