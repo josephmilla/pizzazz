@@ -75,6 +75,10 @@ function noHex(string) {
 
 var theColor = "#a6daef";
 
+/**
+* Color Combinations
+*/
+
 function setComplementary() {
   $(".color-complementary-a").css('background-color', theColor);
   endpointForResponse("complementary?color=" + noHex(theColor), function(json) {
@@ -118,8 +122,28 @@ function setSquare() {
   });
 }
 
+/**
+* Color Conversion
+*/
+
+function setToRGB() {
+  $(".color-torgb-a").css('background-color', theColor);
+  endpointForResponse("torgb?color=" + noHex(theColor), function(json) {
+    $(".color-torgb-info").html(JSON.stringify(json.result, null, 2));
+  });
+}
+
+function setToHSV() {
+  $(".color-tohsv-a").css('background-color', theColor);
+  endpointForResponse("tohsv?color=" + noHex(theColor), function(json) {
+    $(".color-tohsv-info").html(JSON.stringify(json.result, null, 2));
+  });
+}
+
 setComplementary();
 setAnalogous();
 setTriad();
 setSplit();
 setSquare();
+setToRGB();
+setToHSV();
