@@ -5,3 +5,4 @@ node_modules
 *.bak
 *.log
 imageFile.jpg
+.sass-cache
