@@ -14,6 +14,10 @@ function getTriad(color) {
   });
 }
 
+/**
+* API Server GET Request
+* @description: Gets a response and waits for the server callback
+*/
 function forResponse(url, callback) {
   $.ajax({
     url: url,
@@ -29,13 +33,15 @@ function endpointForResponse(url, callback) {
 }
 
 //getTriad();
-
 function setColorIndex(stringHex, index) {
   $("#color-" + index + "-block").css('background-color', stringHex);
   $("#color-" + index + "-text").text(stringHex);
 };
 
-//helper functions to set the colors
+/**
+* Helper functions
+* @description: Set colors given the color hex
+*/
 function setColorOne(stringHex) {
   setColorIndex(stringHex, "one")
 };
@@ -62,7 +68,10 @@ var hexCombinations = [
 var hexIndex = 0;
 var loopHandle;
 
-//test loop to cycle through colors
+/**
+* Test Loop
+* @description: Cycle through colors
+*/
 var funcLoop = function() {
   setColorScheme(hexCombinations[hexIndex++ % hexCombinations.length]);
   loopHandle = setTimeout(funcLoop, 3500);
@@ -73,12 +82,40 @@ function noHex(string) {
   return string.substring(1, string.length);
 }
 
-var theColor = "#a6daef";
+/**
+* Input value
+* @description: Get color value from input textbox
+*/
+var inputValue = "#" + $(".input-hex").val();
+
+var theColor = inputValue ?  inputValue : "#a6daef";
+$(".theColor").html(theColor);
+
+$(".input-hex").keydown(function(event) {
+	if (event.keyCode==13) {
+		inputValue = "#" + $(".input-hex").val();
+    console.log(inputValue);
+
+    theColor = inputValue ?  inputValue : "#a6daef";
+    $(".theColor").html(theColor);
+
+    setComplementary();
+    setAnalogous();
+    setTriad();
+    setSplit();
+    setSquare();
+    setToRGB();
+    setToHSV();
+	}
+});
+
+
+
 
 /**
 * Color Combinations
+* @description: Ping server, and visualize
 */
-
 function setComplementary() {
   $(".color-complementary-a").css('background-color', theColor);
   endpointForResponse("complementary?color=" + noHex(theColor), function(json) {
@@ -124,6 +161,7 @@ function setSquare() {
 
 /**
 * Color Conversion
+* @description: Ping server, and visualize
 */
 
 function setToRGB() {
