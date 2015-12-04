@@ -507,7 +507,7 @@ app.get(analyzeWebsite, function(req, res, next) {
         var resultJSON = {
           'endpoint': analyzeWebsite,
           'webURL': (webURL ? webURL : 'Sorry, no webURL defined'),
-          'colorPalette': ((colorPalette && webURL) ? colorPalette : 'Sorry, no colorPalette defined')
+          'result': ((colorPalette && webURL) ? colorPalette : 'Sorry, no result defined')
         };
 
         res.setHeader('Content-Type', 'application/json');

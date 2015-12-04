@@ -304,6 +304,32 @@ function setSentiment() {
   });
 }
 
+// Update values on enter keydown
+var webURL = "http://nebez.github.io/floppybird/";
+loadPage("frameWeb", webURL);
+$("#webURL").keydown(function(event) {
+	if (event.keyCode==13) {
+    // Set the color from input
+		webURL = $("#webURL").val();
+    webURL = webURL ? webURL : "http://nebez.github.io/floppybird/";
+    loadPage("frameWeb", webURL);
+    setWeb();
+	}
+});
+
+function setWeb() {
+  $(".color-web-a").css('background-color', theColor);
+  endpointForResponse("web?url=" + webURL, function(json) {
+    $(".color-web-a").css('background-color', json.result[0].toString());
+    $(".color-web-b").css('background-color', json.result[1].toString());
+    $(".color-web-c").css('background-color', json.result[2].toString());
+    $(".color-web-d").css('background-color', json.result[3].toString());
+    $(".color-web-e").css('background-color', json.result[4].toString());
+    $(".color-web-f").css('background-color', json.result[5].toString());
+    loadPage("frameWeb", webURL);
+  });
+}
+
 
 /**
 * loadPage
@@ -329,3 +355,4 @@ setToHSV();
 setImage();
 setRandom();
 setSentiment();
+setWeb();
