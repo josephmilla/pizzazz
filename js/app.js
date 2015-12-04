@@ -90,16 +90,16 @@ function noHex(string) {
 * Input value
 * @description: Get color value from input textbox
 */
-var inputValue = "#" + $(".input-hex").val();
+var inputValue = "#" + $("#colorHex").val();
 
 var theColor = inputValue ?  inputValue : "#a6daef";
 $(".theColor").html("Color selected: " + theColor);
 
 // Update values on enter keydown
-$(".input-hex").keydown(function(event) {
+$("#colorHex").keydown(function(event) {
 	if (event.keyCode==13) {
     // Set the color from input
-		inputValue = "#" + $(".input-hex").val();
+		inputValue = "#" + $("#colorHex").val();
     console.log(inputValue);
     theColor = inputValue ?  inputValue : "#a6daef";
     $(".theColor").html("Color selected: " + theColor);
@@ -124,9 +124,6 @@ $(".input-hex").keydown(function(event) {
     setToHSV();
 	}
 });
-
-
-
 
 /**
 * Color Combinations
@@ -190,7 +187,6 @@ function setMonochromatic() {
 * Color Conversion
 * @description: Ping server, and visualize
 */
-
 function setToRGB() {
   $(".color-torgb-a").css('background-color', theColor);
   endpointForResponse("torgb?color=" + noHex(theColor), function(json) {
@@ -205,6 +201,42 @@ function setToHSV() {
   });
 }
 
+/**
+* Color Palettes
+* @description: Ping server, and visualize
+*/
+var imageURL = "http://pizzazz.xyz/cutepuppy.jpg";
+loadPage("frameImage", imageURL);
+
+// Update values on enter keydown
+$("#imageURL").keydown(function(event) {
+	if (event.keyCode==13) {
+    // Set the color from input
+		imageURL = $("#imageURL").val();
+    imageURL = imageURL ? imageURL : "http://pizzazz.xyz/cutepuppy.jpg";
+    console.log(imageURL);
+    loadPage("frameImage", imageURL);
+    setImage();
+	}
+});
+
+function setImage() {
+  $(".color-image-a").css('background-color', theColor);
+  endpointForResponse("image?url=" + imageURL, function(json) {
+    $(".color-image-a").css('background-color', json.dominantColor.toString());
+  });
+}
+
+/**
+* loadPage
+* @description: Loads given url to an object specified by an id
+*/
+function loadPage(id, url){
+  document.getElementById(id).innerHTML='<object type="text/html" data=' + url + ' height="100%" width="100%"></object>';
+}
+
+
+
 setComplementary();
 setAnalogous();
 setTriad();
@@ -213,3 +245,4 @@ setSquare();
 setMonochromatic();
 setToRGB();
 setToHSV();
+setImage();

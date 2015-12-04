@@ -61,7 +61,7 @@ p {
   float: left;
 }
 
-.input-hex {
+.inputForm {
   clear: right;
   display: inline-block !important;
   box-sizing: auto !important;
@@ -189,4 +189,10 @@ p {
 .color-tohsv-info,
 .color-torgb-info {
   text-align: left !important;
+}
+
+.frameDiv {
+  height: 500px;
+  margin-bottom: 25px;
+  overflow: hidden;
 }

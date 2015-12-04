@@ -21,8 +21,10 @@
             <h1>Colors matter.</h1>
             <h2>We're here to help.</h2>
             <p>Give us a color. We'll give you a scheme.</p><br>
-            <span class="font-code inline">pizzazz.xyz/api/triad/?color=
-            <input class="input-hex" type="text" size="8" maxlength="7" value="a6daef"></span>
+            <span class="font-code inline">
+              pizzazz.xyz/api/triad/?color=
+              <input id="colorHex" class="inputForm" type="text" size="8" maxlength="7" value="a6daef">
+            </span>
           </center>
 
       </div>
@@ -177,7 +179,6 @@
         <div class="small-12 columns smaller-vertical-spacer">
           <center>
             <h1>Color Conversion</h1>
-            <pre class="font-code-label theColor">Color selected: #696969</pre>
           </center>
         </div>
 
@@ -222,6 +223,44 @@
             <h1>Color Palettes</h1>
           </center>
         </div>
+
+        <div class="small-12 medium-12 columns box-sample">
+          <center>
+            <h3>image</h3>
+            <div class="small-12 medium-12 columns">
+              <span class="font-code inline">
+                /api/image?url=
+                <input id="imageURL" class="inputForm" type="text" size="35" maxlength="256" value="http://pizzazz.xyz/cutepuppy.jpg">
+              </span>
+            </div>
+
+            <!-- left side -->
+            <div class="small-12 medium-3 columns">
+              &nbsp;
+            </div>
+
+            <div class="small-12 medium-6 columns">
+              <div id="frameImage" class="frameDiv" frameborder="0" width="100%">
+                Hello, World!
+              </div>
+            </div>
+
+            <!-- right side -->
+            <div class="small-12 medium-3 columns">
+              &nbsp;
+            </div>
+
+            <div class="small-12 medium-12 columns">
+              <table class="table-sample">
+                <tr>
+                  <td><div class="box-color color-image-a"></div></td>
+                </tr>
+              </table>
+            </div>
+          </center>
+        </div>
+
+        <div class="small-12 columns small-vertical-spacer">&nbsp;</div>
       </div>
     </div>
 
