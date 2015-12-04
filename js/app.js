@@ -93,7 +93,7 @@ function noHex(string) {
 var inputValue = "#" + $(".input-hex").val();
 
 var theColor = inputValue ?  inputValue : "#a6daef";
-$(".theColor").html(theColor);
+$(".theColor").html("Color selected: " + theColor);
 
 // Update values on enter keydown
 $(".input-hex").keydown(function(event) {
@@ -102,7 +102,7 @@ $(".input-hex").keydown(function(event) {
 		inputValue = "#" + $(".input-hex").val();
     console.log(inputValue);
     theColor = inputValue ?  inputValue : "#a6daef";
-    $(".theColor").html(theColor, "one");
+    $(".theColor").html("Color selected: " + theColor);
 
     // Stop loop
     clearTimeout(loopHandle);
