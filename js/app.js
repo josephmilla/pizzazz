@@ -285,6 +285,26 @@ function setRandom() {
   });
 }
 
+// Update values on enter keydown
+var sentimentText = "I'm so happy happy happy shalalala!";
+$("#sentimentText").keydown(function(event) {
+	if (event.keyCode==13) {
+    // Set the color from input
+		sentimentText = $("#sentimentText").val();
+    sentimentText = sentimentText ? sentimentText : "I'm so happy happy happy shalalala!";
+    setSentiment();
+	}
+});
+
+function setSentiment() {
+  $(".color-sentiment-a").css('background-color', theColor);
+
+  endpointForResponse("sentiment?text=" + sentimentText, function(json) {
+    $(".color-sentiment-a").css('background-color', json.result.toString());
+  });
+}
+
+
 /**
 * loadPage
 * @description: Loads given url to an object specified by an id
@@ -308,3 +328,4 @@ setToRGB();
 setToHSV();
 setImage();
 setRandom();
+setSentiment();
