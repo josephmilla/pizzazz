@@ -78,6 +78,10 @@ var funcLoop = function() {
 }
 funcLoop();
 
+/**
+* NoHex
+* @description: Removes hashtag
+*/
 function noHex(string) {
   return string.substring(1, string.length);
 }
@@ -91,13 +95,24 @@ var inputValue = "#" + $(".input-hex").val();
 var theColor = inputValue ?  inputValue : "#a6daef";
 $(".theColor").html(theColor);
 
+// Update values on enter keydown
 $(".input-hex").keydown(function(event) {
 	if (event.keyCode==13) {
+    // Set the color from input
 		inputValue = "#" + $(".input-hex").val();
     console.log(inputValue);
-
     theColor = inputValue ?  inputValue : "#a6daef";
-    $(".theColor").html(theColor);
+    $(".theColor").html(theColor, "one");
+
+    // Stop loop
+    clearTimeout(loopHandle);
+    endpointForResponse("triad?color=" + noHex(theColor), function(json) {
+      // Set every triad to the same value
+      setColorIndex([theColor], "one");
+      setColorIndex([json.result[1].toString()], "two");
+      setColorIndex([json.result[2].toString()], "three");
+    });
+
 
     setComplementary();
     setAnalogous();
