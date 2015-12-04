@@ -119,6 +119,7 @@ $(".input-hex").keydown(function(event) {
     setTriad();
     setSplit();
     setSquare();
+    setMonochromatic();
     setToRGB();
     setToHSV();
 	}
@@ -174,6 +175,17 @@ function setSquare() {
   });
 }
 
+function setMonochromatic() {
+  $(".color-monochromatic-a").css('background-color', theColor);
+  endpointForResponse("monochromatic?color=" + noHex(theColor), function(json) {
+    $(".color-monochromatic-b").css('background-color', json.result[1].toString());
+    $(".color-monochromatic-c").css('background-color', json.result[2].toString());
+    $(".color-monochromatic-d").css('background-color', json.result[3].toString());
+    $(".color-monochromatic-e").css('background-color', json.result[4].toString());
+    $(".color-monochromatic-f").css('background-color', json.result[5].toString());
+  });
+}
+
 /**
 * Color Conversion
 * @description: Ping server, and visualize
@@ -198,5 +210,6 @@ setAnalogous();
 setTriad();
 setSplit();
 setSquare();
+setMonochromatic();
 setToRGB();
 setToHSV();
