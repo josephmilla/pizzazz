@@ -142,7 +142,7 @@ describe('GET /api/sentiment', function() {
 });
 
 /**
- * Sentiment
+ * Web
  */
 describe('GET /api/web', function() {
   it('respond with json', function(done) {
