@@ -205,16 +205,15 @@ function setToHSV() {
 * Color Palettes
 * @description: Ping server, and visualize
 */
-var imageURL = "http://pizzazz.xyz/cutepuppy.jpg";
-loadPage("frameImage", imageURL);
 
 // Update values on enter keydown
+var imageURL = "http://pizzazz.xyz/cutepuppy.jpg";
+loadPage("frameImage", imageURL);
 $("#imageURL").keydown(function(event) {
 	if (event.keyCode==13) {
     // Set the color from input
 		imageURL = $("#imageURL").val();
     imageURL = imageURL ? imageURL : "http://pizzazz.xyz/cutepuppy.jpg";
-    console.log(imageURL);
     loadPage("frameImage", imageURL);
     setImage();
 	}
@@ -224,6 +223,65 @@ function setImage() {
   $(".color-image-a").css('background-color', theColor);
   endpointForResponse("image?url=" + imageURL, function(json) {
     $(".color-image-a").css('background-color', json.dominantColor.toString());
+  });
+}
+
+// Update values on enter keydown
+var numRandom = 5;
+$("#numRandom").keydown(function(event) {
+	if (event.keyCode==13) {
+    // Set the color from input
+		numRandom = $("#numRandom").val();
+    numRandom = numRandom ? numRandom : 5;
+    setRandom();
+	}
+});
+
+function setRandom() {
+  $(".color-random-a").css('background-color', theColor);
+
+  endpointForResponse("random?number=" + numRandom, function(json) {
+
+    if(numRandom >= 5) {
+      $(".color-random-a").css('background-color', json.result[0].toString());
+      $(".color-random-b").css('background-color', json.result[1].toString());
+      $(".color-random-c").css('background-color', json.result[2].toString());
+      $(".color-random-d").css('background-color', json.result[3].toString());
+      $(".color-random-e").css('background-color', json.result[4].toString());
+    }
+
+    if(numRandom == 4) {
+      $(".color-random-a").css('background-color', json.result[0].toString());
+      $(".color-random-b").css('background-color', json.result[1].toString());
+      $(".color-random-c").css('background-color', "#FFFFFF");
+      $(".color-random-d").css('background-color', json.result[2].toString());
+      $(".color-random-e").css('background-color', json.result[3].toString());
+    }
+
+    if(numRandom == 3) {
+      $(".color-random-a").css('background-color', "#FFFFFF");
+      $(".color-random-b").css('background-color', json.result[0].toString());
+      $(".color-random-c").css('background-color', json.result[1].toString());
+      $(".color-random-d").css('background-color', json.result[2].toString());
+      $(".color-random-e").css('background-color', "#FFFFFF");
+    }
+
+    if(numRandom == 2) {
+      $(".color-random-a").css('background-color', "#FFFFFF");
+      $(".color-random-b").css('background-color', json.result[0].toString());
+      $(".color-random-c").css('background-color', "#FFFFFF");
+      $(".color-random-d").css('background-color', json.result[1].toString());
+      $(".color-random-e").css('background-color', "#FFFFFF");
+    }
+
+    if(numRandom == 1) {
+      $(".color-random-a").css('background-color', "#FFFFFF");
+      $(".color-random-b").css('background-color', "#FFFFFF");
+      $(".color-random-c").css('background-color', json.result[0].toString());
+      $(".color-random-d").css('background-color', "#FFFFFF");
+      $(".color-random-e").css('background-color', "#FFFFFF");
+    }
+
   });
 }
 
@@ -237,6 +295,9 @@ function loadPage(id, url){
 
 
 
+/**
+* Activate Functions
+*/
 setComplementary();
 setAnalogous();
 setTriad();
@@ -246,3 +307,4 @@ setMonochromatic();
 setToRGB();
 setToHSV();
 setImage();
+setRandom();
