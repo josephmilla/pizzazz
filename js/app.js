@@ -282,6 +282,14 @@ function setRandom() {
       $(".color-random-e").css('background-color', "#FFFFFF");
     }
 
+    if(numRandom == 0) {
+      $(".color-random-a").css('background-color', "#FFFFFF");
+      $(".color-random-b").css('background-color', "#FFFFFF");
+      $(".color-random-c").css('background-color', "#FFFFFF");
+      $(".color-random-d").css('background-color', "#FFFFFF");
+      $(".color-random-e").css('background-color', "#FFFFFF");
+    }
+
   });
 }
 
